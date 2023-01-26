@@ -1,0 +1,16 @@
+type Gravatar @entity(immutable: false) {
+  id: String!
+  owner: Bytes! # address
+  displayName: String! # string
+  imageUrl: String! # string
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+
+type Transaction @entity(immutable: true) {
+  id: String!
+  displayName: String! # string
+  imageUrl: String! # string
+}
