@@ -69,24 +69,6 @@ export class Gravatar extends Entity {
     this.set("imageUrl", Value.fromString(value));
   }
 
-  get blockNumber(): BigInt {
-    let value = this.get("blockNumber");
-    return value!.toBigInt();
-  }
-
-  set blockNumber(value: BigInt) {
-    this.set("blockNumber", Value.fromBigInt(value));
-  }
-
-  get blockTimestamp(): BigInt {
-    let value = this.get("blockTimestamp");
-    return value!.toBigInt();
-  }
-
-  set blockTimestamp(value: BigInt) {
-    this.set("blockTimestamp", Value.fromBigInt(value));
-  }
-
   get transactionHash(): Bytes {
     let value = this.get("transactionHash");
     return value!.toBytes();
@@ -144,5 +126,55 @@ export class Transaction extends Entity {
 
   set imageUrl(value: string) {
     this.set("imageUrl", Value.fromString(value));
+  }
+}
+
+export class Block extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(id != null, "Cannot save Block entity without an ID");
+    if (id) {
+      assert(
+        id.kind == ValueKind.STRING,
+        `Entities of type Block must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`
+      );
+      store.set("Block", id.toString(), this);
+    }
+  }
+
+  static load(id: string): Block | null {
+    return changetype<Block | null>(store.get("Block", id));
+  }
+
+  get id(): string {
+    let value = this.get("id");
+    return value!.toString();
+  }
+
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get blockNumber(): BigInt {
+    let value = this.get("blockNumber");
+    return value!.toBigInt();
+  }
+
+  set blockNumber(value: BigInt) {
+    this.set("blockNumber", Value.fromBigInt(value));
+  }
+
+  get blockTimestamp(): BigInt {
+    let value = this.get("blockTimestamp");
+    return value!.toBigInt();
+  }
+
+  set blockTimestamp(value: BigInt) {
+    this.set("blockTimestamp", Value.fromBigInt(value));
   }
 }

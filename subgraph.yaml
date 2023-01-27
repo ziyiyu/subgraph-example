@@ -16,15 +16,20 @@ dataSources:
       entities:
         - Gravatar
         - Transaction
+        - Block
       abis:
         - name: GravatarRegistry
           file: ./abis/GravatarRegistry.json
-      callHandlers:
-        - function: createGravatar(string,string)
-          handler: handleCreateGravatar
       eventHandlers:
         - event: NewGravatar(uint256,address,string,string)
           handler: handleNewGravatar
         - event: UpdatedGravatar(uint256,address,string,string)
           handler: handleUpdatedGravatar
+      callHandlers:
+        - function: createGravatar(string,string)
+          handler: handleCreateGravatar
+      blockHandlers:
+        - handler: handleBlockWithCallToContract
+          filter:
+            kind: call
       file: ./src/gravatar-registry.ts

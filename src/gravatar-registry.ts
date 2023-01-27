@@ -3,18 +3,15 @@ import {
   NewGravatar as NewGravatarEvent,
   UpdatedGravatar as UpdatedGravatarEvent
 } from "../generated/GravatarRegistry/GravatarRegistry"
-import { Gravatar,Transaction} from "../generated/schema"
+import { Gravatar,Transaction,Block} from "../generated/schema"
+import { ethereum } from '@graphprotocol/graph-ts'
 
 export function handleNewGravatar(event: NewGravatarEvent): void {
   let gravatar = new Gravatar(event.params.id.toString());
   gravatar.owner = event.params.owner
   gravatar.displayName = event.params.displayName
   gravatar.imageUrl = event.params.imageUrl
-
-  gravatar.blockNumber = event.block.number
-  gravatar.blockTimestamp = event.block.timestamp
   gravatar.transactionHash = event.transaction.hash
-
   gravatar.save()
 }
 
@@ -27,9 +24,6 @@ export function handleUpdatedGravatar(event: UpdatedGravatarEvent): void {
   gravatar.owner = event.params.owner
   gravatar.displayName = event.params.displayName
   gravatar.imageUrl = event.params.imageUrl
-
-  gravatar.blockNumber = event.block.number
-  gravatar.blockTimestamp = event.block.timestamp
   gravatar.transactionHash = event.transaction.hash
 
   gravatar.save()
@@ -42,4 +36,14 @@ export function handleCreateGravatar(call: CreateGravatarCall): void {
   transaction.displayName = call.inputs._displayName
   transaction.imageUrl = call.inputs._imageUrl
   transaction.save()
+}
+
+
+export function handleBlockWithCallToContract(block: ethereum.Block): void {
+  let id = block.hash.toHexString()
+  let entity = new Block(id)
+  entity.blockNumber = block.number
+  entity.blockTimestamp = block.timestamp
+
+  entity.save()
 }

@@ -3,8 +3,6 @@ type Gravatar @entity(immutable: false) {
   owner: Bytes! # address
   displayName: String! # string
   imageUrl: String! # string
-  blockNumber: BigInt!
-  blockTimestamp: BigInt!
   transactionHash: Bytes!
 }
 
@@ -13,4 +11,10 @@ type Transaction @entity(immutable: true) {
   id: String!
   displayName: String! # string
   imageUrl: String! # string
+}
+
+type Block @entity(immutable: true) {
+  id: String!
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
 }

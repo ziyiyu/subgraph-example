@@ -10,21 +10,26 @@ dataSources:
       abi: GravatarRegistry
       startBlock: 8266411
     mapping:
-      kind: ethereum/events
-      apiVersion: 0.0.7
-      language: wasm/assemblyscript
       entities:
         - Gravatar
         - Transaction
-      abis:
-        - name: GravatarRegistry
-          file: GravatarRegistry\abis\GravatarRegistry.json
-      callHandlers:
-        - function: createGravatar(string,string)
-          handler: handleCreateGravatar
+        - Block
       eventHandlers:
         - event: NewGravatar(uint256,address,string,string)
           handler: handleNewGravatar
         - event: UpdatedGravatar(uint256,address,string,string)
           handler: handleUpdatedGravatar
+      callHandlers:
+        - function: createGravatar(string,string)
+          handler: handleCreateGravatar
+      abis:
+        - name: GravatarRegistry
+          file: GravatarRegistry\abis\GravatarRegistry.json
+      kind: ethereum/events
+      blockHandlers:
+        - handler: handleBlockWithCallToContract
+          filter:
+            kind: call
+      language: wasm/assemblyscript
       file: GravatarRegistry\GravatarRegistry.wasm
+      apiVersion: 0.0.7
