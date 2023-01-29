@@ -11,7 +11,8 @@ export function handleNewGravatar(event: NewGravatarEvent): void {
   gravatar.owner = event.params.owner
   gravatar.displayName = event.params.displayName
   gravatar.imageUrl = event.params.imageUrl
-  gravatar.transactionHash = event.transaction.hash
+  gravatar.description = event.params.imageUrl.replaceAll("/"," ");
+  gravatar.transaction = event.transaction.hash
   gravatar.save()
 }
 
@@ -23,27 +24,25 @@ export function handleUpdatedGravatar(event: UpdatedGravatarEvent): void {
   }
   gravatar.owner = event.params.owner
   gravatar.displayName = event.params.displayName
+  gravatar.description = event.params.imageUrl.replaceAll("/"," ");
   gravatar.imageUrl = event.params.imageUrl
-  gravatar.transactionHash = event.transaction.hash
-
+  gravatar.transaction = event.transaction.hash
   gravatar.save()
 }
 
 
 export function handleCreateGravatar(call: CreateGravatarCall): void {
-  let id = call.transaction.hash.toHexString()
-  let transaction = new Transaction(id)
-  transaction.displayName = call.inputs._displayName
-  transaction.imageUrl = call.inputs._imageUrl
+  let transaction = new Transaction(call.transaction.hash)
+  transaction.gasPrice = call.transaction.gasPrice
+  transaction.block = call.block.hash
   transaction.save()
 }
 
 
 export function handleBlockWithCallToContract(block: ethereum.Block): void {
-  let id = block.hash.toHexString()
-  let entity = new Block(id)
+  let entity = new Block(block.hash)
   entity.blockNumber = block.number
   entity.blockTimestamp = block.timestamp
-
+  
   entity.save()
 }
