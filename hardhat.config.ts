@@ -31,9 +31,6 @@ const config: HardhatUserConfig = {
     },
     goerli: {
       url: `https://goerli.infura.io/v3/91de03ef572d4688886c617f3a41c947`,
-      accounts: ["d752e5fe4e509ff00db8fa142a3944d86fb4c1461cdbe49acbd30ba68bfc917d"],
-      gas: 2100000,
-      gasPrice: 8000000000
     },
     kovan: {
       url: `https://kovan.infura.io/v3/NFTRVRWJ58UPGH1VRBKCC2QDANHF2FCYK9`,
