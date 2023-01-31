@@ -10,6 +10,7 @@ type _Schema_
 type Gravatar @entity(immutable: false) {
   id: String!
   owner: Bytes! # address
+  groupName: String! # string
   displayName: String! # string
   description: String! # string
   imageUrl: String! # string
@@ -28,4 +29,10 @@ type Block @entity(immutable: true) {
   blockNumber: BigInt!
   blockTimestamp: BigInt!
   transactions: [Transaction!] @derivedFrom(field: "block")
+}
+
+type Registry @entity(immutable: false) {
+  id: String!
+  address: Bytes! # address
+  groupName: String! # string
 }

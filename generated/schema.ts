@@ -51,6 +51,15 @@ export class Gravatar extends Entity {
     this.set("owner", Value.fromBytes(value));
   }
 
+  get groupName(): string {
+    let value = this.get("groupName");
+    return value!.toString();
+  }
+
+  set groupName(value: string) {
+    this.set("groupName", Value.fromString(value));
+  }
+
   get displayName(): string {
     let value = this.get("displayName");
     return value!.toString();
@@ -220,5 +229,55 @@ export class Block extends Entity {
     } else {
       this.set("transactions", Value.fromBytesArray(<Array<Bytes>>value));
     }
+  }
+}
+
+export class Registry extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(id != null, "Cannot save Registry entity without an ID");
+    if (id) {
+      assert(
+        id.kind == ValueKind.STRING,
+        `Entities of type Registry must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`
+      );
+      store.set("Registry", id.toString(), this);
+    }
+  }
+
+  static load(id: string): Registry | null {
+    return changetype<Registry | null>(store.get("Registry", id));
+  }
+
+  get id(): string {
+    let value = this.get("id");
+    return value!.toString();
+  }
+
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get address(): Bytes {
+    let value = this.get("address");
+    return value!.toBytes();
+  }
+
+  set address(value: Bytes) {
+    this.set("address", Value.fromBytes(value));
+  }
+
+  get groupName(): string {
+    let value = this.get("groupName");
+    return value!.toString();
+  }
+
+  set groupName(value: string) {
+    this.set("groupName", Value.fromString(value));
   }
 }

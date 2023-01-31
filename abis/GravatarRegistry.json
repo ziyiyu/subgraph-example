@@ -1,7 +1,18 @@
 [
   {
+    "inputs": [],
+    "stateMutability": "nonpayable",
+    "type": "constructor"
+  },
+  {
     "anonymous": false,
     "inputs": [
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "groupName",
+        "type": "string"
+      },
       {
         "indexed": false,
         "internalType": "uint256",
@@ -35,6 +46,12 @@
     "inputs": [
       {
         "indexed": false,
+        "internalType": "string",
+        "name": "groupName",
+        "type": "string"
+      },
+      {
+        "indexed": false,
         "internalType": "uint256",
         "name": "id",
         "type": "uint256"
@@ -63,8 +80,16 @@
   },
   {
     "inputs": [
-      { "internalType": "string", "name": "_displayName", "type": "string" },
-      { "internalType": "string", "name": "_imageUrl", "type": "string" }
+      {
+        "internalType": "string",
+        "name": "_displayName",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "_imageUrl",
+        "type": "string"
+      }
     ],
     "name": "createGravatar",
     "outputs": [],
@@ -72,39 +97,132 @@
     "type": "function"
   },
   {
+    "inputs": [],
+    "name": "factory",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
     "inputs": [
-      { "internalType": "address", "name": "owner", "type": "address" }
+      {
+        "internalType": "address",
+        "name": "owner",
+        "type": "address"
+      }
     ],
     "name": "getGravatar",
     "outputs": [
-      { "internalType": "string", "name": "", "type": "string" },
-      { "internalType": "string", "name": "", "type": "string" }
+      {
+        "internalType": "string",
+        "name": "",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "",
+        "type": "string"
+      }
     ],
     "stateMutability": "view",
     "type": "function"
   },
   {
-    "inputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
     "name": "gravatarToOwner",
-    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
     "stateMutability": "view",
     "type": "function"
   },
   {
-    "inputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
     "name": "gravatars",
     "outputs": [
-      { "internalType": "address", "name": "owner", "type": "address" },
-      { "internalType": "string", "name": "displayName", "type": "string" },
-      { "internalType": "string", "name": "imageUrl", "type": "string" }
+      {
+        "internalType": "address",
+        "name": "owner",
+        "type": "address"
+      },
+      {
+        "internalType": "string",
+        "name": "displayName",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "imageUrl",
+        "type": "string"
+      }
     ],
     "stateMutability": "view",
     "type": "function"
   },
   {
-    "inputs": [{ "internalType": "address", "name": "", "type": "address" }],
+    "inputs": [],
+    "name": "groupName",
+    "outputs": [
+      {
+        "internalType": "string",
+        "name": "",
+        "type": "string"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "string",
+        "name": "_groupName",
+        "type": "string"
+      }
+    ],
+    "name": "initialize",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
     "name": "ownerToGravatar",
-    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
     "stateMutability": "view",
     "type": "function"
   },
@@ -117,7 +235,11 @@
   },
   {
     "inputs": [
-      { "internalType": "string", "name": "_imageUrl", "type": "string" }
+      {
+        "internalType": "string",
+        "name": "_imageUrl",
+        "type": "string"
+      }
     ],
     "name": "updateGravatarImage",
     "outputs": [],
@@ -126,7 +248,11 @@
   },
   {
     "inputs": [
-      { "internalType": "string", "name": "_displayName", "type": "string" }
+      {
+        "internalType": "string",
+        "name": "_displayName",
+        "type": "string"
+      }
     ],
     "name": "updateGravatarName",
     "outputs": [],

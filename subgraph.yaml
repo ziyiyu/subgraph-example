@@ -1,16 +1,35 @@
-specVersion: 0.0.5
+specVersion: 0.0.7
 schema:
   file: ./schema.graphql
 features:
   - fullTextSearch
 dataSources:
+  - kind: ethereum/contract
+    name: Factory
+    network: goerli
+    source:
+      address: '0x580b57db55a0636B53Cb09BbA4aE8CbB765D72bA'
+      abi: Factory
+      startBlock: 8403815
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      file: ./src/factory.ts
+      entities:
+        - Registry
+      abis:
+        - name: Factory
+          file: ./abis/Factory.json
+      eventHandlers:
+        - event: RegistryCreated(string,indexed address,uint256)
+          handler: handleNewRegistry
+templates:
   - kind: ethereum
     name: GravatarRegistry
     network: goerli
     source:
-      address: "0x964F658FC863BAceFC719b85e8730fbc11c86ce4"
       abi: GravatarRegistry
-      startBlock: 8266411
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
@@ -23,9 +42,9 @@ dataSources:
         - name: GravatarRegistry
           file: ./abis/GravatarRegistry.json
       eventHandlers:
-        - event: NewGravatar(uint256,address,string,string)
+        - event: NewGravatar(string,uint256,address,string,string)
           handler: handleNewGravatar
-        - event: UpdatedGravatar(uint256,address,string,string)
+        - event: UpdatedGravatar(string,uint256,address,string,string)
           handler: handleUpdatedGravatar
       callHandlers:
         - function: createGravatar(string,string)
