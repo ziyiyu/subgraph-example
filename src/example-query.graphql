@@ -1,0 +1,15 @@
+query ExampleQuery($first1: Int,$first2: Int) {
+  gravatars(first: $first1) {
+    id
+    owner
+    groupName
+    displayName
+  }
+  transactions(first: $first2) {
+    id
+    block {
+      id
+    }
+    gasPrice
+  }
+}

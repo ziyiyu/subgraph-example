@@ -1,0 +1,8 @@
+sources:
+  - name: subgraph-example
+    handler:
+      graphql:
+        endpoint: https://api.studio.thegraph.com/query/39656/subgraph-example/v0.2.8
+
+documents:
+  - ./src/example-query.graphql
